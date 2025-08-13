@@ -1,0 +1,35 @@
+###############################
+##Author: Sashikanta Pattanayak
+###############################
+services:
+  postgres_pgday:
+    image: pgday/pgdatabase:latest
+    container_name: postgres_pgday
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${PG_USERNAME}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
+      # - POSTGRES_HOST_AUTH_METHOD=${POSTGRES_HOST_AUTH_METHOD}
+      - POSTGRES_INITDB_ARGS=${POSTGRES_INITDB_ARGS}
+    ports:
+      - '5433:5433'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      # copy the sql scripts
+      - ./sql/sample_sql.sql:/var/lib/scripts/sample_sql.sql
+      - ./sql/productivity_examples.sql:/var/lib/scripts/productivity_examples.sql
+      - ./sql/maintenance_scripts.sql:/var/lib/scripts/maintenance_scripts.sql
+      - ./sql/monitor_db.sh:/var/lib/scripts/monitor_db.sh
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    restart: always
+    networks:
+      - postgres_pgday
+
+networks:
+  postgres_pgday:
+    driver: bridge
+
