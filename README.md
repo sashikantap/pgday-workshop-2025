@@ -1,4 +1,4 @@
-# pgconf-Lab-2025
+# pgday-workshop-2025
 
 ## Name
 Lab for __PGDay 2025 Training - Essential PostgreSQL Tools and Extensions for DBA and Developer Productivity__
@@ -57,6 +57,9 @@ Lab for __PGDay 2025 Training - Essential PostgreSQL Tools and Extensions for DB
 ## Clone and Setup
 ```
 git clone https://github.com/sashikantap/pgday-workshop-2025.git
+```
+
+```
 cd pgday-workshop-2025/pgday-docker-2025
 ```
 ### Build Postgres container image 
@@ -68,7 +71,7 @@ docker build -t pgday/pgdatabase:latest -f dockerfile-postgres .
 
 ### Launch and create container using docker compose 
 
-#### Start pgconf container and initialize with sample schema 
+#### Start postgres_pgday container and initialize with sample schema 
 
 
 ```
@@ -76,7 +79,7 @@ docker-compose up -d postgres_pgday
 ```
 
 <!-- Adding Blockquote --> 
-> $`\textcolor{red}{\text{IMPORTANT}}`$ After you start the pgconf container, it will take atleast 2 minutes to create the cluster.
+> $`\textcolor{red}{\text{IMPORTANT}}`$ After you start the postgres_pgday container, it will take atleast 2 minutes to create the cluster.
 You can check the progress using below command 
 
 ```
