@@ -63,16 +63,16 @@ RUN pip3 install --break-system-packages pgcli
 
 # Essential PostgreSQL Extensions
 
-# Install plprofiler 
+# Install plprofiler with proper error handling
 RUN set -eux \
    && git clone https://github.com/bigsql/plprofiler.git \
-   && cd  plprofiler \
+   && cd plprofiler \
    && make USE_PGXS=1 \
    && make USE_PGXS=1 install \
    && cd python-plprofiler \
-   && python3 ./setup.py install \
-   && cd .. \
-   && rm -rf python-plprofiler
+   && pip3 install --break-system-packages . \
+   && cd ../.. \
+   && rm -rf plprofiler
 
 # pgbadger
 RUN set -eux \
@@ -129,14 +129,21 @@ RUN set -eux \
    && cd .. \
    && rm -rf pg_stat_monitor
 
-# orafce - Oracle compatibility functions
-RUN set -eux \
-   && git clone https://github.com/orafce/orafce.git \
-   && cd orafce \
-   && make USE_PGXS=1 \
-   && make USE_PGXS=1 install \
-   && cd .. \
-   && rm -rf orafce
+# orafce - Oracle compatibility functions (commented out due to build issues)
+# RUN set -eux \
+#    && apt-get update \
+#    && apt-get install -y --no-install-recommends \
+#       libicu-dev \
+#       pkg-config \
+#    && git clone https://github.com/orafce/orafce.git \
+#    && cd orafce \
+#    && make USE_PGXS=1 clean || true \
+#    && make USE_PGXS=1 \
+#    && make USE_PGXS=1 install \
+#    && cd .. \
+#    && rm -rf orafce \
+#    && apt-get clean \
+#    && rm -rf /var/lib/apt/lists/*
 
 # Install monitoring tools
 # pg_activity - top-like activity monitor
@@ -255,13 +262,14 @@ EXCEPTION WHEN OTHERS THEN
     RAISE WARNING 'Failed to create pg_stat_monitor: %', SQLERRM;
 END\$\$;
 
-DO \$\$
-BEGIN
-    CREATE EXTENSION IF NOT EXISTS orafce;
-    RAISE NOTICE 'Created orafce';
-EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING 'Failed to create orafce: %', SQLERRM;
-END\$\$;
+-- orafce extension commented out due to build issues
+-- DO \$\$
+-- BEGIN
+--     CREATE EXTENSION IF NOT EXISTS orafce;
+--     RAISE NOTICE 'Created orafce';
+-- EXCEPTION WHEN OTHERS THEN
+--     RAISE WARNING 'Failed to create orafce: %', SQLERRM;
+-- END\$\$;
 
 DO \$\$
 BEGIN
