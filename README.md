@@ -56,8 +56,8 @@ Lab for __PGDay 2025 Training - Essential PostgreSQL Tools and Extensions for DB
 
 ## Clone and Setup
 ```
-git clone https://github.com/RajeshMadiwale/pgconf-2025-lab.git
-cd pgconf-2025-lab/pgconf-docker-2025
+git clone https://github.com/sashikantap/pgday-workshop-2025.git
+cd pgday-workshop-2025/pgday-docker-2025
 ```
 ### Build Postgres container image 
 

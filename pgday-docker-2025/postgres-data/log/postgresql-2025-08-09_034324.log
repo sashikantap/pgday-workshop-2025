@@ -1,0 +1,26 @@
+2025-08-09 03:43:24 UTC [48]: [3-1] user=,db=,app=,client= LOG:  starting PostgreSQL 17.5 (Debian 17.5-1.pgdg120+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+2025-08-09 03:43:24 UTC [48]: [4-1] user=,db=,app=,client= LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2025-08-09 03:43:24 UTC [52]: [1-1] user=,db=,app=,client= LOG:  database system was shut down at 2025-08-09 03:43:24 UTC
+2025-08-09 03:43:24 UTC [48]: [5-1] user=,db=,app=,client= LOG:  database system is ready to accept connections
+2025-08-09 03:43:24 UTC [59]: [1-1] user=[unknown],db=[unknown],app=[unknown],client=[local] LOG:  connection received: host=[local]
+2025-08-09 03:43:24 UTC [59]: [2-1] user=postgres,db=postgres,app=[unknown],client=[local] LOG:  connection authenticated: user="postgres" method=trust (/var/lib/postgresql/data/pg_hba.conf:117)
+2025-08-09 03:43:24 UTC [59]: [3-1] user=postgres,db=postgres,app=[unknown],client=[local] LOG:  connection authorized: user=postgres database=postgres application_name=psql
+2025-08-09 03:43:24 UTC [61]: [1-1] user=[unknown],db=[unknown],app=[unknown],client=[local] LOG:  connection received: host=[local]
+2025-08-09 03:43:24 UTC [61]: [2-1] user=postgres,db=postgres,app=[unknown],client=[local] LOG:  connection authenticated: user="postgres" method=trust (/var/lib/postgresql/data/pg_hba.conf:117)
+2025-08-09 03:43:24 UTC [61]: [3-1] user=postgres,db=postgres,app=[unknown],client=[local] LOG:  connection authorized: user=postgres database=postgres application_name=psql
+2025-08-09 03:43:25 UTC [63]: [1-1] user=[unknown],db=[unknown],app=[unknown],client=[local] LOG:  connection received: host=[local]
+2025-08-09 03:43:25 UTC [63]: [2-1] user=postgres,db=pgday,app=[unknown],client=[local] LOG:  connection authenticated: user="postgres" method=trust (/var/lib/postgresql/data/pg_hba.conf:117)
+2025-08-09 03:43:25 UTC [63]: [3-1] user=postgres,db=pgday,app=[unknown],client=[local] LOG:  connection authorized: user=postgres database=pgday application_name=psql
+2025-08-09 03:43:25 UTC [63]: [4-1] user=postgres,db=pgday,app=psql,client=[local] WARNING:  Failed to create pgaudit: pgaudit must be loaded via shared_preload_libraries
+2025-08-09 03:43:25 UTC [63]: [5-1] user=postgres,db=pgday,app=psql,client=[local] CONTEXT:  PL/pgSQL function inline_code_block line 6 at RAISE
+2025-08-09 03:43:25 UTC [63]: [6-1] user=postgres,db=pgday,app=psql,client=[local] WARNING:  Failed to create pg_cron: unrecognized configuration parameter "cron.database_name"
+2025-08-09 03:43:25 UTC [63]: [7-1] user=postgres,db=pgday,app=psql,client=[local] CONTEXT:  PL/pgSQL function inline_code_block line 6 at RAISE
+2025-08-09 03:43:25 UTC [63]: [8-1] user=postgres,db=pgday,app=psql,client=[local] WARNING:  Failed to create auto_explain: extension "auto_explain" is not available
+2025-08-09 03:43:25 UTC [63]: [9-1] user=postgres,db=pgday,app=psql,client=[local] CONTEXT:  PL/pgSQL function inline_code_block line 6 at RAISE
+2025-08-09 03:43:25 UTC [48]: [6-1] user=,db=,app=,client= LOG:  received fast shutdown request
+2025-08-09 03:43:25 UTC [48]: [7-1] user=,db=,app=,client= LOG:  aborting any active transactions
+2025-08-09 03:43:25 UTC [48]: [8-1] user=,db=,app=,client= LOG:  background worker "logical replication launcher" (PID 56) exited with exit code 1
+2025-08-09 03:43:25 UTC [50]: [1-1] user=,db=,app=,client= LOG:  shutting down
+2025-08-09 03:43:25 UTC [50]: [2-1] user=,db=,app=,client= LOG:  checkpoint starting: shutdown immediate
+2025-08-09 03:43:26 UTC [50]: [3-1] user=,db=,app=,client= LOG:  checkpoint complete: wrote 1087 buffers (6.6%); 0 WAL file(s) added, 0 removed, 1 recycled; write=0.202 s, sync=0.040 s, total=0.275 s; sync files=339, longest=0.001 s, average=0.001 s; distance=11372 kB, estimate=11372 kB; lsn=0/2000028, redo lsn=0/2000028
+2025-08-09 03:43:26 UTC [48]: [9-1] user=,db=,app=,client= LOG:  database system is shut down
