@@ -6,7 +6,7 @@
 FROM postgres:latest
 
 # Metadata
-LABEL maintainer="pg raj"
+LABEL maintainer="sashikanta"
 LABEL version="1.0"
 LABEL description="PostgreSQL with Essential DBA and Developer Productivity Tools"
 
@@ -216,7 +216,8 @@ END\$\$;
 
 DO \$\$
 BEGIN
-    CREATE EXTENSION IF NOT EXISTS pg_partman;
+    CREATE SCHEMA IF NOT EXISTS partman;
+    CREATE EXTENSION IF NOT EXISTS pg_partman WITH SCHEMA partman;
     RAISE NOTICE 'Created pg_partman';
 EXCEPTION WHEN OTHERS THEN
     RAISE WARNING 'Failed to create pg_partman: %', SQLERRM;
