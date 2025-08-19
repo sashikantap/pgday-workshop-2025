@@ -115,13 +115,12 @@ RUN set -eux \
     && rm -rf hypopg \
     && rm -rf /var/lib/apt/lists/*
 
-# pg_cron, pg_repack, and pgaudit extensions
+# pg_cron and pg_repack extensions
 RUN set -eux \
    && apt-get update \
    && apt-get install --no-install-recommends -y \
       postgresql-${PG_SERVER_VERSION}-cron \
       postgresql-${PG_SERVER_VERSION}-repack \
-      postgresql-${PG_SERVER_VERSION}-pgaudit \
    && rm -rf /var/lib/apt/lists/*
 
 # Additional extensions
@@ -190,14 +189,6 @@ BEGIN
     RAISE NOTICE 'Created hypopg';
 EXCEPTION WHEN OTHERS THEN
     RAISE WARNING 'Failed to create hypopg: %', SQLERRM;
-END\$\$;
-
-DO \$\$
-BEGIN
-    CREATE EXTENSION IF NOT EXISTS pgaudit;
-    RAISE NOTICE 'Created pgaudit';
-EXCEPTION WHEN OTHERS THEN
-    RAISE WARNING 'Failed to create pgaudit: %', SQLERRM;
 END\$\$;
 
 DO \$\$
