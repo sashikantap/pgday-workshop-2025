@@ -134,21 +134,21 @@ RUN set -eux \
    && cd .. \
    && rm -rf pg_stat_monitor
 
-# orafce - Oracle compatibility functions (commented out due to build issues)
-# RUN set -eux \
-#    && apt-get update \
-#    && apt-get install -y --no-install-recommends \
-#       libicu-dev \
-#       pkg-config \
-#    && git clone https://github.com/orafce/orafce.git \
-#    && cd orafce \
-#    && make USE_PGXS=1 clean || true \
-#    && make USE_PGXS=1 \
-#    && make USE_PGXS=1 install \
-#    && cd .. \
-#    && rm -rf orafce \
-#    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/*
+# orafce - Oracle compatibility functions
+RUN set -eux \
+   && apt-get update \
+   && apt-get install -y --no-install-recommends \
+      libicu-dev \
+      pkg-config \
+      flex \
+   && git clone https://github.com/orafce/orafce.git \
+   && cd orafce \
+   && make USE_PGXS=1 clean || true \
+   && make USE_PGXS=1 \
+   && make USE_PGXS=1 install \
+   && cd .. \
+   && rm -rf orafce \
+   && rm -rf /var/lib/apt/lists/*
 
 
 RUN set -eux \
@@ -165,7 +165,7 @@ RUN set -eux \
    && rm -rf pgcenter_0.9.2_linux_amd64.tar.gz pgcenter_*
 
 # Configure shared_preload_libraries in actual config
-RUN echo "shared_preload_libraries = 'pg_stat_statements,pg_stat_monitor,plprofiler,auto_explain,pg_cron'" >> /usr/share/postgresql/postgresql.conf.sample
+RUN echo "shared_preload_libraries = 'pg_stat_statements,pgaudit,pg_cron,plprofiler,pg_stat_monitor,auto_explain'" >> /usr/share/postgresql/postgresql.conf.sample
 
 # Create initialization script for extensions
 RUN mkdir -p /docker-entrypoint-initdb.d
@@ -260,14 +260,13 @@ EXCEPTION WHEN OTHERS THEN
     RAISE WARNING 'Failed to create pg_stat_monitor: %', SQLERRM;
 END\$\$;
 
--- orafce extension commented out due to build issues
--- DO \$\$
--- BEGIN
---     CREATE EXTENSION IF NOT EXISTS orafce;
---     RAISE NOTICE 'Created orafce';
--- EXCEPTION WHEN OTHERS THEN
---     RAISE WARNING 'Failed to create orafce: %', SQLERRM;
--- END\$\$;
+DO \$\$
+BEGIN
+    CREATE EXTENSION IF NOT EXISTS orafce;
+    RAISE NOTICE 'Created orafce';
+EXCEPTION WHEN OTHERS THEN
+    RAISE WARNING 'Failed to create orafce: %', SQLERRM;
+END\$\$;
 
 DO \$\$
 BEGIN
