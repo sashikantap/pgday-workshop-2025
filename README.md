@@ -9,6 +9,11 @@ This Docker setup provides PostgreSQL 17 with essential DBA and developer produc
 ### Required Software
 - **Docker Desktop** (Windows/Mac) or **Docker Engine** (Linux)
 - **Docker Compose** (usually included with Docker Desktop)
+- **PGAdmin** (OpenSource)
+- **PSQL** (Comes with PostgreSQL database)
+- **PGCLI**
+- **plprofiler**
+- **pg_repack**
 
 ### System Requirements
 - **RAM**: Minimum 4GB, Recommended 8GB+
