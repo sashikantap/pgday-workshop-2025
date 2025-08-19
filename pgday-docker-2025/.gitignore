@@ -1,0 +1,10 @@
+# PostgreSQL data directory
+postgres-data/
+
+# Docker logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
