@@ -1,0 +1,46 @@
+###############################
+##Author: Sashikanta Pattanayak
+###############################
+services:
+  postgres_pgday:
+    build:
+      context: .
+      dockerfile: dockerfile-postgres
+    container_name: postgres_pgday
+    env_file:
+      - ./.env
+    environment:
+      - POSTGRES_USER=${PG_USERNAME}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DATABASE}
+      - POSTGRES_INITDB_ARGS=${POSTGRES_INITDB_ARGS}
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # copy the sql scripts
+      - ./sql/sample_sql.sql:/var/lib/scripts/sample_sql.sql:ro
+      - ./sql/productivity_examples.sql:/var/lib/scripts/productivity_examples.sql:ro
+      - ./sql/maintenance_scripts.sql:/var/lib/scripts/maintenance_scripts.sql:ro
+      - ./sql/monitor_db.sh:/var/lib/scripts/monitor_db.sh:ro
+      - ./config/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - ./config/pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf -c hba_file=/etc/postgresql/pg_hba.conf
+    restart: unless-stopped
+    networks:
+      - postgres_pgday
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${PG_USERNAME} -d ${PG_DATABASE}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  postgres_pgday:
+    driver: bridge
+
