@@ -81,6 +81,7 @@ cd pgday-workshop-2025/pgday-docker-2025
 
 ### For Linux/Mac Users
 ```bash
+export PGPASSWORD=password
 chmod +x *
 ./build-and-test.sh
 ```
