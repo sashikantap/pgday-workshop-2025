@@ -81,6 +81,7 @@ cd pgday-workshop-2025/pgday-docker-2025
 
 ### For Linux/Mac Users
 ```bash
+chmod +x *
 ./build-and-test.sh
 ```
 
